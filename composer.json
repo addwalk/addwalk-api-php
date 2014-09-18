@@ -1,0 +1,28 @@
+{
+  "name": "addwalk-api-php",
+  "description": "addwalk API",
+  "homepage": "https://github.com/addwalk/addwalk-api-php",
+  "license": "Apache License Version 2.0",
+  "require": {
+    "league/oauth2-client": "0.3.*@dev"
+  },
+  "keywords": [
+    "api",
+    "oauth2",
+    "addwalk"
+  ],
+  "authors": [
+    {
+      "name": "Frank Cieslik",
+      "email": "frank.cieslik@gmail.com"
+    }
+  ],
+
+  "autoload": {
+      "psr-0": {
+          "addwalk": "lib/",
+      }
+  },
+
+  "minimum-stability" : "dev"
+}
