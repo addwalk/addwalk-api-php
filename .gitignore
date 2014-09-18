@@ -1,0 +1,7 @@
+/vendor
+/coverage
+composer.phar
+composer.lock
+.DS_Store
+*.sublime-*
+example.php
