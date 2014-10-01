@@ -4,11 +4,11 @@ namespace addwalk\Service;
 
 use \League\OAuth2\Client\Token\AccessToken as AccessToken;
 
-class OAuth2Provider extends \League\OAuth2\Client\Provider\AbstractProvider
+class OAuth2Provider extends \League\OAuth2\Client\Provider\IdentityProvider
 {
 
   public $token = false;
-  public $baseUrl = 'http://api.addwalk.dev:3000/';
+  public $baseUrl = 'http://api.dev.addwalk.com/';
 
   public function __construct($options)
   {

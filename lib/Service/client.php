@@ -28,6 +28,17 @@ class Client
     return $this->decodeResponse($this->getRequest($path));
   }
 
+  /**
+   *
+   *
+   *
+   *
+   */
+  public function post($post = ''){
+    $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path;
+    return $this->decodeResponse($this->postRequest($path, $post));
+  }
+
   private function getRequest($path)
   {
     $request = $this->getHttpClient()->setBaseUrl($path)->get(null, $this->getHttpClientBasicParams())->send(array());
@@ -35,8 +46,11 @@ class Client
     return $response;
   }
 
-  private function postRequest($path)
+  private function postRequest($path, $post)
   {
+    $request = $this->getHttpClient()->setBaseUrl($path)->createRequest('POST', null, $this->getHttpClientBasicParams(), $post)->send(array());
+    $response = $request->getBody();
+    return $this->decodeResponse($this->getRequest($path));
   }
 
   private function putRequest($path)

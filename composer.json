@@ -2,10 +2,10 @@
     "name": "addwalk/addwalk-api-php",
     "description": "addwalk API (PHP)",
     "require": {
-        "league/oauth2-client": "0.3.*@dev"
+        "league/oauth2-client": "*"
     },
     "require-dev": {
-        "league/oauth2-client": "0.3.*@dev"
+        "league/oauth2-client": "*"
     },
     "license": "Apache License Version 2.0",
     "authors": [
@@ -15,7 +15,10 @@
         }
     ],
     "autoload": {
-        "classmap": ["lib"]
+        "psr-0": {
+            "Addwalk": "lib"
+        },
+        "classmap" : ["Module.php"]
     },
     "minimum-stability": "dev"
 }
