@@ -9,6 +9,7 @@ class Client
 {
 
   public $api_version = "1";
+  private $auth_provider = array();
 
   public function __construct($auth_provider)
   {
@@ -28,15 +29,58 @@ class Client
     return $this->decodeResponse($this->getRequest($path));
   }
 
+  // /**
+  //  * Create a new Category
+  //  *
+  //  * @param  Array $options Params should be included
+  //  * @return Array Array of Json-Objects
+  //  */
+  // public function create(Array $options = [], $body = true)
+  // {
+  //   $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path;
+  //   return $this->decodeResponse($this->getRequest($path));
+  // }
+
+
   /**
+   * Create a new Category
    *
-   *
-   *
-   *
+   * @param  Array $options Params should be included
+   * @return Array Array of Json-Objects
    */
-  public function post($post = ''){
+  public function update(Array $options = [], $body = true)
+  {
+    $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path;
+    return $this->decodeResponse($this->getRequest($path));
+  }
+
+
+
+  /**
+   * Create a new Category
+   *
+   * @param  Array $options Params should be included
+   * @return Array Array of Json-Objects
+   */
+  public function create($post = ''){
     $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path;
     return $this->decodeResponse($this->postRequest($path, $post));
+  }
+
+  /**
+   * Show a Category
+   *
+   * @param  Array $post Params should be included
+   * @return Array Array of Json-Objects
+   */
+  public function show($id){
+
+    if(!is_numeric($id)  || empty($id)){
+      return false;
+    }
+
+    $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path.'/'.$id;
+    return $this->decodeResponse($this->getRequest($path, $post));
   }
 
   private function getRequest($path)
@@ -48,13 +92,18 @@ class Client
 
   private function postRequest($path, $post)
   {
-    $request = $this->getHttpClient()->setBaseUrl($path)->createRequest('POST', null, $this->getHttpClientBasicParams(), $post)->send(array());
+    $json = $this->toJson($post);
+    $request = $this->getHttpClient()->setBaseUrl($path)->createRequest('POST', null, $this->getHttpClientBasicParams(), $json)->send(array());
     $response = $request->getBody();
-    return $this->decodeResponse($this->getRequest($path));
+    return $response;
   }
 
-  private function putRequest($path)
+  private function putRequest($path, $put)
   {
+    $json = $this->toJson($put);
+    $request = $this->getHttpClient()->put($path, $this->getHttpClientBasicParams(), $request);
+    $response = $request->getBody();
+    return $response;
   }
 
   private function destroyRequest($path)
@@ -82,8 +131,13 @@ class Client
   {
     return array(
       'Authorization' => 'Bearer '.$this->auth_provider->token->accessToken,
-      'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8'
+      'Content-Type' => 'application/json;charset=UTF-8',
+      'Accept' => 'application/json',
     );
+  }
+
+  private function toJson($value){
+    return json_encode($value);
   }
 
 }
