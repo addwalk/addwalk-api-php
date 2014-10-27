@@ -25,7 +25,7 @@ class Client
    */
   public function index(Array $options = [], $body = true)
   {
-    $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path;
+    $path = $this->auth_provider->baseUrl.$this->api_version.'/'.$this->path.'?'.http_build_query($options);
     return $this->decodeResponse($this->getRequest($path));
   }
 
