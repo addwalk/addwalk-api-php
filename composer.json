@@ -15,10 +15,7 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Addwalk": "lib"
-        },
-        "classmap" : ["Module.php"]
+        "lib"  
     },
     "minimum-stability": "dev"
 }
