@@ -8,7 +8,7 @@ class OAuth2Provider extends \League\OAuth2\Client\Provider\IdentityProvider
 {
 
   public $token = false;
-  public $baseUrl = 'http://api.dev.addwalk.com/';
+  public $baseUrl = 'http://api.addwalk.com/';
 
   public function __construct($options)
   {
